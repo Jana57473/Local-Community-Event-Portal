@@ -125,6 +125,20 @@ form output {
     color: green;
 }
 
+#preferences {
+    margin-top: 40px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border: 1px dashed #666;
+}
+
+#preferences label,
+#preferences select,
+#preferences button {
+    display: block;
+    margin-top: 10px;
+}
+
 
     </style>
 </head>
@@ -244,6 +258,21 @@ form output {
     <div id="videoMessage"></div>
 </div>
 
+<!-- Preferences Section -->
+<div id="preferences">
+    <h2>Save Your Preferred Event</h2>
+    
+    <label for="preferredEvent">Preferred Event Type:</label>
+    <select id="preferredEvent" onchange="savePreference()">
+        <option value="">--Choose--</option>
+        <option value="music">Music Night</option>
+        <option value="food">Food Festival</option>
+        <option value="art">Art Expo</option>
+    </select>
+
+    <button onclick="clearPreferences()">Clear Preferences</button>
+</div>
+
 
     <!-- Home Section -->
     <section id="home">
@@ -316,6 +345,30 @@ form output {
             return "You have unsaved changes. Are you sure you want to leave?";
         }
     };
+</script>
+
+<script>
+    // Save preference to localStorage
+    function savePreference() {
+        const selectedEvent = document.getElementById("preferredEvent").value;
+        localStorage.setItem("preferredEvent", selectedEvent);
+    }
+
+    // Load preference on page load
+    window.onload = function () {
+        const savedEvent = localStorage.getItem("preferredEvent");
+        if (savedEvent) {
+            document.getElementById("preferredEvent").value = savedEvent;
+        }
+    };
+
+    // Clear preferences
+    function clearPreferences() {
+        localStorage.removeItem("preferredEvent");
+        sessionStorage.clear();
+        alert("Preferences cleared!");
+        document.getElementById("preferredEvent").value = "";
+    }
 </script>
 
 
