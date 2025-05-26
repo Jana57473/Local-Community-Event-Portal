@@ -56,6 +56,42 @@
         color: darkgreen;
     }
 
+form {
+    margin-top: 30px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    width: 400px;
+    background-color: #f9f9f9;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+form button {
+    padding: 10px 15px;
+    background-color: #3399cc;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form output {
+    display: block;
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+}
+
 
     </style>
 </head>
@@ -109,6 +145,33 @@
     </tr>
 </table>
 
+<!-- Event Registration Form -->
+<h2>Register for an Event</h2>
+<form id="eventForm" onsubmit="showConfirmation(event)">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required autofocus>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <label for="date">Event Date:</label>
+    <input type="date" id="date" required>
+
+    <label for="eventType">Event Type:</label>
+    <select id="eventType" required>
+        <option value="">Select an event</option>
+        <option value="music">Music Night</option>
+        <option value="food">Food Festival</option>
+        <option value="art">Art Expo</option>
+    </select>
+
+    <label for="message">Message:</label>
+    <textarea id="message" rows="4" placeholder="Any message for us?"></textarea>
+
+    <button type="submit">Submit</button>
+    <output id="confirmationMsg"></output>
+</form>
+
 
     <!-- Home Section -->
     <section id="home">
@@ -127,6 +190,16 @@
         <h2>Contact</h2>
         <p>Email us at: support@community.org</p>
     </section>
+
+<script>
+    function showConfirmation(event) {
+        event.preventDefault(); // prevent page reload
+        const name = document.getElementById("name").value;
+        document.getElementById("confirmationMsg").textContent =
+            `Thank you, ${name}. Your registration has been received!`;
+    }
+</script>
+
 
 </body>
 </html>
