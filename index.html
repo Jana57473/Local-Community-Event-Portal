@@ -112,6 +112,19 @@ form output {
     color: gray;
 }
 
+#videoSection {
+    margin-top: 40px;
+    padding: 15px;
+    background-color: #e0f7fa;
+    border: 1px solid #33b5e5;
+}
+
+#videoMessage {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
+}
+
 
     </style>
 </head>
@@ -221,6 +234,16 @@ form output {
     <button type="button" onclick="submitFeedback()">Submit Feedback</button>
 </form>
 
+<!-- Video Invite Section -->
+<div id="videoSection">
+    <h2>Watch Our Promo Video</h2>
+    <video id="promoVideo" width="400" controls oncanplay="showVideoReadyMessage()">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div id="videoMessage"></div>
+</div>
+
 
     <!-- Home Section -->
     <section id="home">
@@ -280,6 +303,19 @@ form output {
     function submitFeedback() {
         alert("Feedback submitted! Thank you.");
     }
+</script>
+
+<script>
+    function showVideoReadyMessage() {
+        document.getElementById("videoMessage").textContent = "🎬 Video ready to play!";
+    }
+
+    window.onbeforeunload = function (e) {
+        const name = document.getElementById("name").value;
+        if (name) {
+            return "You have unsaved changes. Are you sure you want to leave?";
+        }
+    };
 </script>
 
 
