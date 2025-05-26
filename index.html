@@ -92,6 +92,26 @@ form output {
     font-weight: bold;
 }
 
+#eventFee {
+    color: darkgreen;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#feedbackImage {
+    width: 150px;
+    transition: 0.3s;
+}
+
+#feedbackImage.enlarged {
+    width: 300px;
+}
+
+#charCount {
+    font-size: 14px;
+    color: gray;
+}
+
 
     </style>
 </head>
@@ -172,6 +192,35 @@ form output {
     <output id="confirmationMsg"></output>
 </form>
 
+<!-- Event Feedback Section -->
+<h2>Event Feedback</h2>
+
+<form id="feedbackForm">
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" placeholder="Enter phone number" onblur="validatePhone()" required>
+
+    <label for="selectEvent">Choose Event:</label>
+    <select id="selectEvent" onchange="showFee()">
+        <option value="">--Choose--</option>
+        <option value="music">Music Night</option>
+        <option value="food">Food Festival</option>
+        <option value="art">Art Expo</option>
+    </select>
+
+    <div id="eventFee"></div>
+
+    <br>
+    <img src="https://via.placeholder.com/150" id="feedbackImage" ondblclick="enlargeImage()" title="Double-click to enlarge">
+
+    <br><br>
+    <label for="feedback">Feedback:</label>
+    <textarea id="feedback" rows="4" cols="30" onkeydown="countCharacters()"></textarea>
+    <div id="charCount">Characters: 0</div>
+
+    <br>
+    <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+</form>
+
 
     <!-- Home Section -->
     <section id="home">
@@ -197,6 +246,39 @@ form output {
         const name = document.getElementById("name").value;
         document.getElementById("confirmationMsg").textContent =
             `Thank you, ${name}. Your registration has been received!`;
+    }
+</script>
+
+<script>
+    function validatePhone() {
+        const phone = document.getElementById("phone").value;
+        if (!/^\d{10}$/.test(phone)) {
+            alert("Please enter a valid 10-digit phone number.");
+        }
+    }
+
+    function showFee() {
+        const event = document.getElementById("selectEvent").value;
+        let fee = "";
+        if (event === "music") fee = "₹250";
+        else if (event === "food") fee = "₹300";
+        else if (event === "art") fee = "₹200";
+
+        document.getElementById("eventFee").textContent = "Event Fee: " + fee;
+    }
+
+    function enlargeImage() {
+        const img = document.getElementById("feedbackImage");
+        img.classList.toggle("enlarged");
+    }
+
+    function countCharacters() {
+        const feedback = document.getElementById("feedback").value;
+        document.getElementById("charCount").textContent = "Characters: " + feedback.length;
+    }
+
+    function submitFeedback() {
+        alert("Feedback submitted! Thank you.");
     }
 </script>
 
